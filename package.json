@@ -19,8 +19,11 @@
     "dependencies": {
         "@nestjs/common": "^5.4.1",
         "@nestjs/core": "^5.4.1",
+        "@nestjs/typeorm": "^5.2.2",
         "@types/node": "^10.12.11",
+        "pg": "^7.7.1",
         "reflect-metadata": "^0.1.12",
-        "rxjs": "^6.3.3"
+        "rxjs": "^6.3.3",
+        "typeorm": "^0.2.9"
     }
 }
