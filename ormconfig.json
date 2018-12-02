@@ -5,5 +5,10 @@
     "username": "postgres",
     "password": "postgres",
     "database": "star_worders",
-    "entities": ["src/**/**.entity.ts"]
+    "entities": ["src/**/**.entity.ts"],
+    "migrationsTableName": "custom_migration_table",
+    "migrations": ["src/migrations/*.ts"],
+    "cli": {
+        "migrationsDir": "src/migrations"
+    }
 }
