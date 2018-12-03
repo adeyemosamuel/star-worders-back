@@ -12,10 +12,6 @@ export class OrdersTable1543757868407 implements MigrationInterface {
                     isPrimary: true
                 },
                 {
-                    name: 'name',
-                    type: 'varchar'
-                },
-                {
                     name: 'customer_id',
                     type: 'int'
                 }

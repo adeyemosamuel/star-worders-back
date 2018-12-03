@@ -32,7 +32,8 @@ export class OrderItemsTable1543757873200 implements MigrationInterface {
         await queryRunner.createForeignKey('order_items', new TableForeignKey({
             columnNames: ['order_id'],
             referencedColumnNames: ['id'],
-            referencedTableName: 'orders'
+            referencedTableName: 'orders',
+            onDelete: 'CASCADE'
         }));
         await queryRunner.createForeignKey('order_items', new TableForeignKey({
             columnNames: ['product_id'],
