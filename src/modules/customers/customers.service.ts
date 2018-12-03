@@ -10,7 +10,7 @@ export class CustomersService {
         private readonly customerRepository: Repository<Customer>,
     ) { }
 
-    async findAll(): Promise<Customer[]> {
-        return await this.customerRepository.find();
+    findAll(): Promise<Customer[]> {
+        return this.customerRepository.find();
     }
 }
