@@ -6,9 +6,13 @@
         "json"
     ],
     "transform": {
-        "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+        "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "/src/.*\\.spec.ts$",
-    "collectCoverageFrom": ["src/**/*.ts", "!**/node_modules/**", "!**/vendor/**"],
+    "collectCoverageFrom": [
+        "src/modules/**/*.ts",
+        "!**/node_modules/**",
+        "!**/vendor/**"
+    ],
     "coverageReporters": ["json", "lcov"]
 }
