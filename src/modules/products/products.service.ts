@@ -11,7 +11,7 @@ export class ProductsService {
         private readonly productRepository: Repository<Product>
     ) { }
 
-    findAll() {
+    findAll(): Promise<Product[]> {
         return this.productRepository.find();
     }
 }
