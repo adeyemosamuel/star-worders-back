@@ -38,5 +38,7 @@ export class OrderItemsService {
             const savedItem = await this.save(item, product);
             savedItems.push(savedItem);
         }
+
+        return savedItems;
     }
 }
