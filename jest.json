@@ -13,6 +13,5 @@
         "src/modules/**/*.ts",
         "!**/node_modules/**",
         "!**/vendor/**"
-    ],
-    "coverageReporters": ["json", "lcov"]
+    ]
 }
