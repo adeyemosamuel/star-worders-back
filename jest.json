@@ -12,6 +12,7 @@
     "collectCoverageFrom": [
         "src/modules/**/*.ts",
         "!**/node_modules/**",
-        "!**/vendor/**"
+        "!**/vendor/**",
+        "!src/modules/**/*.module.ts"
     ]
 }
