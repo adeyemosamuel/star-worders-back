@@ -14,7 +14,7 @@ export class OrdersController {
     }
 
     @Post()
-    create(@Body() payload: orderDto) {
+    create(@Body() payload: orderDto): Promise<Order> {
 
         const order = plainToClass(Order, payload);
         order.id = null;
@@ -23,7 +23,7 @@ export class OrdersController {
     }
 
     @Put(':id')
-    update(@Param('id') id, @Body() payload: orderDto) {
+    update(@Param('id') id, @Body() payload: orderDto): Promise<Order> {
 
         const order = plainToClass(Order, payload);
         order.id = parseInt(id);

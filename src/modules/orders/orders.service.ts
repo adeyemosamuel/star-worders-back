@@ -17,13 +17,13 @@ export class OrdersService {
         private readonly orderItemsPolicies: Policie
     ) { }
 
-    findAll() {
+    findAll(): Promise<Order[]> {
         return this.orderRepository.find({
             relations: ['items']
         });
     }
 
-    async save(order: Order) {
+    async save(order: Order): Promise<Order> {
         const items = order.items;
         const products = await this.productRepository.find({
             id: In(items.map(item => item.product_id))
