@@ -7,12 +7,17 @@
         "start": "ts-node -r tsconfig-paths/register src/main.ts",
         "start:dev": "nodemon",
         "typeorm": "ts-node ./node_modules/.bin/typeorm",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "jest --config=jest.json",
+        "test:watch": "jest --watch --config=jest.json",
+        "test:coverage": "jest --config=jest.json --coverage --coverageDirectory=coverage"
     },
     "author": "Lucas Sedrez",
     "license": "ISC",
     "devDependencies": {
+        "@types/jest": "^23.3.10",
+        "jest": "^23.6.0",
         "nodemon": "^1.18.7",
+        "ts-jest": "^23.10.5",
         "ts-node": "^7.0.1",
         "tsconfig-paths": "^3.7.0",
         "typescript": "^3.2.1"
