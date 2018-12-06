@@ -4,6 +4,8 @@ import { OrderItemsPolicies } from "./orderItems.policies";
 import { Product } from "../../products/product.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, In } from "typeorm";
+import { OrderItemRepository } from "./orderItem.repository";
+import { Transactional } from "typeorm-transactional-cls-hooked";
 
 @Injectable()
 export class OrderItemsService {
@@ -12,10 +14,12 @@ export class OrderItemsService {
         private readonly orderItemsPolicies: OrderItemsPolicies,
         @InjectRepository(Product)
         private readonly productRepository: Repository<Product>,
-        @InjectRepository(OrderItem)
-        private readonly orderItemRepository: Repository<OrderItem>
-    ) { }
+        private orderItemRepository: OrderItemRepository
+    ) {
+        this.orderItemRepository = this.orderItemRepository.manager.getCustomRepository(OrderItemRepository);
+    }
 
+    @Transactional()
     async save(item: OrderItem, orderId: number, product?: Product) {
         if (!product) {
             product = await this.productRepository.findOne(item.product_id);
@@ -29,6 +33,7 @@ export class OrderItemsService {
         return this.orderItemRepository.save(item);
     }
 
+    @Transactional()
     async saveMultiple(items: OrderItem[], orderId: number) {
         const savedItems = [];
         const products = await this.productRepository.find({
