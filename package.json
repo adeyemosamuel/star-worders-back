@@ -29,6 +29,7 @@
         "@nestjs/typeorm": "^5.2.2",
         "@types/node": "^10.12.11",
         "class-transformer": "^0.2.0",
+        "cors": "^2.8.5",
         "pg": "^7.7.1",
         "reflect-metadata": "^0.1.12",
         "rxjs": "^6.3.3",
