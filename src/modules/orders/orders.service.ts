@@ -14,15 +14,29 @@ export class OrdersService {
 
     findAll(): Promise<Order[]> {
         return this.orderRepository.find({
-            relations: ['items']
+            relations: ['items', 'customer']
+        });
+    }
+
+    findOne(id: number): Promise<Order> {
+        return this.orderRepository.findOne(id, {
+            relations: ['items', 'items.product', 'customer']
         });
     }
 
     async save(order: Order): Promise<Order> {
         const items = order.items;
 
-        await this.orderItemsService.saveMultiple(items);
+        const savedOrder = await this.orderRepository.save(order);
+        const savedItems = await this.orderItemsService.saveMultiple(items, savedOrder.id || order.id);
 
-        return this.orderRepository.save(order);
+        savedOrder.items = savedItems;
+
+        return savedOrder;
+    }
+
+    async remove(id: number): Promise<Order> {
+        const order = await this.orderRepository.findOne(id);
+        return this.orderRepository.remove(order);
     }
 }

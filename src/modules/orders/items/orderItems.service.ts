@@ -16,10 +16,12 @@ export class OrderItemsService {
         private readonly orderItemRepository: Repository<OrderItem>
     ) { }
 
-    async save(item: OrderItem, product?: Product) {
+    async save(item: OrderItem, orderId: number, product?: Product) {
         if (!product) {
             product = await this.productRepository.findOne(item.product_id);
         }
+
+        item.order_id = orderId;
 
         this.orderItemsPolicies.checkRentability(item.unit_price, product.unit_price, product.name);
         this.orderItemsPolicies.checkMultiple(item.quantity, product.multiple, product.name);
@@ -27,7 +29,7 @@ export class OrderItemsService {
         return this.orderItemRepository.save(item);
     }
 
-    async saveMultiple(items: OrderItem[]) {
+    async saveMultiple(items: OrderItem[], orderId: number) {
         const savedItems = [];
         const products = await this.productRepository.find({
             id: In(items.map(item => item.product_id))
@@ -35,7 +37,7 @@ export class OrderItemsService {
 
         for (let item of items) {
             const product = products.find(product => product.id === item.product_id);
-            const savedItem = await this.save(item, product);
+            const savedItem = await this.save(item, orderId, product);
             savedItems.push(savedItem);
         }
 

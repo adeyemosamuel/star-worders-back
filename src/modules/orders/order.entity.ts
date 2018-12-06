@@ -12,7 +12,7 @@ export class Order {
     customer_id: number;
 
     @Type(() => OrderItem)
-    @OneToMany(() => OrderItem, item => item.order, { cascade: true })
+    @OneToMany(() => OrderItem, item => item.order, { cascade: ["remove"] })
     items: OrderItem[];
 
     @ManyToOne(() => Customer)
