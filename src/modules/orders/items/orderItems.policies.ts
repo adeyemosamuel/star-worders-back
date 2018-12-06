@@ -1,4 +1,5 @@
 import { Injectable, UnprocessableEntityException } from "@nestjs/common";
+import { countDecimals } from '../../../common/helpers/decimal.helper';
 
 @Injectable()
 export class OrderItemsPolicies {
@@ -17,6 +18,22 @@ export class OrderItemsPolicies {
         if (multiple && (quantity % multiple) !== 0) {
             throw new UnprocessableEntityException(
                 `O ${productName} só pode ser vendido em múltiplos de ${multiple}.`
+            );
+        }
+    }
+
+    checkQuantity(quantity: number, productName: string): void {
+        if (!Number.isInteger(quantity) || quantity <= 0) {
+            throw new UnprocessableEntityException(
+                `A quantidade do ${productName} deve ser um número inteiro e maior que zero.`
+            );
+        }
+    }
+
+    checkUnitPrice(price: number, productName: string): void {
+        if (countDecimals(price) > 2 || price < 0) {
+            throw new UnprocessableEntityException(
+                `O preço unitário do ${productName} deve possuir até 2 casas decimais e ser um número maior do que zero.`
             );
         }
     }

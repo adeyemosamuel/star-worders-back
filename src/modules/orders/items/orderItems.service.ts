@@ -27,6 +27,8 @@ export class OrderItemsService {
 
         item.order_id = orderId;
 
+        this.orderItemsPolicies.checkQuantity(item.quantity, product.name);
+        this.orderItemsPolicies.checkUnitPrice(item.unit_price, product.name);
         this.orderItemsPolicies.checkRentability(item.unit_price, product.unit_price, product.name);
         this.orderItemsPolicies.checkMultiple(item.quantity, product.multiple, product.name);
 

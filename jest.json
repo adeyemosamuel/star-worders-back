@@ -11,6 +11,7 @@
     "testRegex": "/src/.*\\.spec.ts$",
     "collectCoverageFrom": [
         "src/modules/**/*.ts",
+        "src/common/**/*.ts",
         "!**/node_modules/**",
         "!**/vendor/**",
         "!src/modules/**/*.module.ts"
